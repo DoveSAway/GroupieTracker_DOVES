@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <link rel="icon" href="https://www.linkpicture.com/q/Logo_34.png" type="image/png">
+  <title>JoDio_FM</title>
+  <link rel="stylesheet" href="static/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<header>  
+  <div class="globalClass">
+    <div class="search-container">
+      <input type="text" id="search-box" onkeyup="search()" placeholder="Search.." title="Type in a category">
+    </div>
+    <img src='https://www.linkpicture.com/q/JODIOFM.png' class="logocentral" type='image'>
+  </div>
+</header>
+
+<body>
+  <nav class="side-nav">
+    <div class="wrapper">
+      <img class="logo-side" src="https://www.linkpicture.com/q/Logo_34.png" alt="LogoSide">
+      <div class="three-dots-container">
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+      </div>
+      <div class="nav-bloc n-1">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="far"
+          data-icon="file"
+          class="svg-inline--fa fa-file fa-w-12"
+          role="img"
+          viewBox="0 0 384 512"
+        >
+          <img class="logoInfo" src="https://www.linkpicture.com/q/test_88.png" alt="logoInfos">
+          <path
+            d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"
+          ></path>
+        </svg>
+          <div class="sub-nav">
+            <h2>Concerts</h2>
+            <div class="search-container">
+              <input type="text" id="search-box2" onkeyup="search()" placeholder="Search.." title="Type in a category">
+            </div>
+            {{ range .Datarela }}
+            <ul>
+                <div class="block_in_sub_nav">
+                  <h3>
+                    {{ .Name }}
+                  </h3>
+                  <div class="p_concert">
+                    <div class="p_block">
+                      {{ range $key, $value := .M_Rel }}
+                      <h5>
+                        <strong>
+                          {{ $key }}
+                          :
+                        </strong> 
+                        <br>
+                        <br>
+                        {{range $value }}   
+                        {{.}}
+                        {{end}}
+                      </h5>
+                       {{ end }}
+                    </div>
+                    <br>
+                  </div>
+                </div>
+            </ul>
+            {{ end }}
+          </div>
+    </div>
+  </nav>
+
+  <div class="block-grid">
+    {{ range .Datartist }}
+    <div class="block">
+
+      <div class="logo">
+
+        <img class="img_api" src="{{ .Image }}">
+      </div>
+
+      <h1>
+        {{ .Name }}
+      </h1>
+      <p class="ptext">
+        <br>
+        <strong class="members">Members :</strong> 
+        {{ .Members }}<br><br>
+        <strong>Creation date :</strong>
+        {{ .CreationDate }}<br><br>
+        <strong>First Album date :</strong>
+        {{ .FirstAlbum }}<br><br>
+      </p>
+    </div>
+    {{ end }}
+  </div>
+  <script>
+    /*---------Main Search Bar----------*/
+    $(document).ready(function() {
+      $('#search-box').on('input', function() {
+        var searchQuery = $(this).val().toLowerCase();
+        $('.block h1').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block').hide();
+          } else {
+            $(this).closest('.block').show();
+          }
+        });
+        $('.block h1').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block').hide();
+          } else {
+            $(this).closest('.block').show();
+          }
+        });
+      });
+
+      $('#search-button').on('click', function() {
+        var searchQuery = $('#search-box').val().toLowerCase();
+        $('.block p').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block').hide();
+          } else {
+            $(this).closest('.block').show();
+          }
+        });
+        $('.block p').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block').hide();
+          } else {
+            $(this).closest('.block').show();
+          }
+        });
+      });
+    });
+    /*---------Side Search Bar----------*/
+    $(document).ready(function() {
+      $('#search-box2').on('input', function() {
+        var searchQuery = $(this).val().toLowerCase();
+        $('.block_in_sub_nav h3').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block_in_sub_nav').hide();
+          } else {
+            $(this).closest('.block_in_sub_nav').show();
+          }
+        });
+      });
+
+      $('#search-button').on('click', function() {
+        var searchQuery = $('#search-box2').val().toLowerCase();
+        $('.block_in_sub_nav h3').each(function() {
+          var text = $(this).text().toLowerCase();
+          if (text.indexOf(searchQuery) === -1) {
+            $(this).closest('.block_in_sub_nav').hide();
+          } else {
+            $(this).closest('.block_in_sub_nav').show();
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
